@@ -1,7 +1,4 @@
 import requests
-from bs4 import BeautifulSoup
-import re
-import json
 from datetime import datetime
 import time
 
@@ -18,28 +15,6 @@ class Stop:
 
     def __str__(self):
         return f"{self.name} ({self.id}): {self.arrived}"
-
-def get_data(url: str):
-    data = requests.get(url)
-    html = BeautifulSoup(data.text, "html.parser")
-    scripts = html.find_all("script")
-    for script in scripts:
-        string = str(script.text).strip()
-        if ("Maps.data = {" in string):
-            regex = re.compile(r"Maps\.data = (.*?);")
-            foo = regex.match(string)
-            if foo is not None:
-                return json.loads(foo.group(1))
-
-    return json.loads("{}")
-
-def add_to_dict(stops):
-    for stop in stops:
-        stop_dict[str(stop["id"])] = Stop(stop["id"], stop["address"])
-        print(f"Adding stop {stop["address"]}")
-        if stop["eta"] == "arrived" and not stop_dict.get(str(stop["id"])).arrived:
-            print(f"Arrived at stop {stop["address"]}")
-            stop_dict.get(str(stop["id"])).arrived = True
 
 def get_night_data():
     data = requests.get("https://buswhere.com/uaf/routes/night_route",
@@ -59,17 +34,6 @@ def get_night_data():
 
 # Start by getting the initialization data
 # FIXME Buswhere gets rid of morning routes after 6!
-'''
-print("Loading nenana data")
-nenana = get_data("https://buswhere.com/uaf/routes/nenana_morning")
-add_to_dict(nenana["stops"])
-
-# TODO Yukon data
-'''
-
-print("Loading night data")
-night = get_data("https://buswhere.com/uaf/routes/night_route")
-add_to_dict(night["stops"])
 
 print(stop_dict.keys())
 print(f"Time: {datetime.now().time()}")
