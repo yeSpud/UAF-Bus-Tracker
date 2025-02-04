@@ -15,5 +15,5 @@ class Stop(BaseModel):
     route = ForeignKeyField(Route, backref="stops")
 
 class Arrival(BaseModel):
-    stop = ForeignKeyField(Stop, backref="arriavls")
-    time = TimestampField
+    stop = ForeignKeyField(Stop, backref="arrivals")
+    time = TimestampField()
