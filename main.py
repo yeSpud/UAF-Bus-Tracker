@@ -1,4 +1,5 @@
 import logging
+import os
 
 import requests
 from datetime import datetime
@@ -15,7 +16,8 @@ handler = logging.StreamHandler()
 formatter = logging.Formatter("%(asctime)s [%(name)-12s] %(levelname)-8s %(message)s")
 handler.setFormatter(formatter)
 logger.addHandler(handler)
-logger.setLevel(logging.WARNING)
+level = os.environ.get("LOG_LEVEL", "WARNING")
+logger.setLevel(level)
 
 def parse_data(data):
     json = data.json()
