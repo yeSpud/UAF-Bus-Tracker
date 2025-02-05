@@ -1,6 +1,6 @@
 from peewee import *
 
-db = PostgresqlDatabase("postgres", user="postgres", password="postgres", host="localhost", port=5432)
+db = PostgresqlDatabase("postgres", user="postgres", password="postgres", host="uaf-bus-tracker-postgres-1", port=5432)
 
 class BaseModel(Model):
     class Meta:

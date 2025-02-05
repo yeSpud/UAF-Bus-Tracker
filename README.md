@@ -24,7 +24,7 @@ run `docker compose stop`
 **DO NOT RUN `docker compose down` - THAT DELETES THE DATABASE**
 
 ### Launch a shell in the container
-run `docker compose exec [CONTAINER-NAME] bash`
+run `docker compose exec trackerbash`
 
 ### Initialize the database
 1. Make sure the database is **up and running**
