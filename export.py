@@ -51,7 +51,7 @@ for route in Route.select():
             t_th = pre_populate_dict()
 
             all = pre_populate_dict()
-            pass
+            
         else:
             monday = {}
             tuesday = {}
