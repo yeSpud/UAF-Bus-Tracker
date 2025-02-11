@@ -13,6 +13,7 @@ RUN pip3 install -r requirements.txt
 
 COPY database.py .
 COPY initalizaton.py .
+COPY export.py .
 COPY main.py .
 
 CMD ["python3", "main.py"]
