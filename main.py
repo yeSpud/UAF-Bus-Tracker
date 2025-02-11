@@ -16,7 +16,7 @@ handler = logging.StreamHandler()
 formatter = logging.Formatter("%(asctime)s [%(name)-12s] %(levelname)-8s %(message)s")
 handler.setFormatter(formatter)
 logger.addHandler(handler)
-level = os.environ.get("LOG_LEVEL", "WARNING")
+level = os.environ.get("LOG_LEVEL", "INFO")
 logger.setLevel(level)
 
 def parse_data(data):
@@ -24,7 +24,7 @@ def parse_data(data):
 
     # Check that there is a stop eta
     if not json["stop_eta"]:
-        logger.warning("No stop eta")
+        # logger.warning("No stop eta")
         return
 
     stop_etas: dict = json["stop_eta"]
@@ -43,8 +43,8 @@ def get_yukon_data():
     y1_data = requests.get("https://buswhere.com/uaf/routes/yukon_route_bus_1", headers={"Accept": "application/json"})
     parse_data(y1_data)
 
-    y2_data = requests.get("https://buswhere.com/uaf/routes/yukon_route_bus_2", headers={"Accept": "application/json"})
-    parse_data(y2_data)
+    # y2_data = requests.get("https://buswhere.com/uaf/routes/yukon_route_bus_2", headers={"Accept": "application/json"})
+    # parse_data(y2_data)
 
 def get_night_data():
     data = requests.get("https://buswhere.com/uaf/routes/night_route", headers={"Accept": "application/json"})
